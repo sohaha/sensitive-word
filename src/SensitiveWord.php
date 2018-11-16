@@ -92,6 +92,7 @@ class SensitiveWord
         if (!!$wordTree) {
             return $wordTree;
         }
+        $string = $string.'';
         $len = mb_strlen($string);
         $result = [];
         $stack = [];
