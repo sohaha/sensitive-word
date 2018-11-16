@@ -80,15 +80,18 @@ class SensitiveWord
         };
     }
 
-    public function replace($string, $dot = '*')
+    public function has($string, $wordTree = null)
     {
-        $wordTree = $this->search($string);
+        $wordTree = $this->search($string, $wordTree);
 
-        return str_replace(Z::arrayGet($wordTree, 'words'), $dot, $string);
+        return !!Z::arrayGet($wordTree, 'words');
     }
 
-    public function search($string)
+    public function search($string, $wordTree = null)
     {
+        if (!!$wordTree) {
+            return $wordTree;
+        }
         $len = mb_strlen($string);
         $result = [];
         $stack = [];
@@ -142,5 +145,16 @@ class SensitiveWord
             'lists' => $result,
             'words' => array_flip(array_flip(array_column($result, 'word'))),
         ];
+    }
+
+    public function replace($string, $dot = '*', $wordTree = null)
+    {
+        $wordTree = $this->search($string, $wordTree);
+        $words = Z::arrayGet($wordTree, 'words');
+        foreach ($words as $word) {
+            $string = str_replace($word, str_repeat($dot, mb_strlen($word)), $string);
+        }
+
+        return $string;
     }
 }
