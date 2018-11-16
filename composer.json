@@ -1,0 +1,22 @@
+{
+  "name": "zls/sensitive-word",
+  "description": "敏感字匹配处理",
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "影浅",
+      "email": "seekwe@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Zls\\SensitiveWord\\": "src/"
+    }
+  },
+  "require": {
+      "php"        : ">=5.4.0",
+      "zls/framework": "*"
+  }
+}
